@@ -22,11 +22,13 @@ var reducer = (state = initialState, action) => {
   switch(action.type) {
     case types.LIST_ALL:
       return state;
+
     case types.DELETE_TASK:
       var index = findTaskById(state, action.taskId);
       state.splice(index, 1);
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
+
     case types.ADD_TASK:
       console.log(action)
       var newTask = {
@@ -38,6 +40,15 @@ var reducer = (state = initialState, action) => {
       state.push(newTask);
       localStorage.setItem('tasks', JSON.stringify(state));
       return [...state];
+
+    case types.EDIT_TASK:
+      console.log(action);
+      return state;
+
+    case types.UPDATE_TASK:
+      console.log(action);
+      return state;
+
     default:
       return state;
   }

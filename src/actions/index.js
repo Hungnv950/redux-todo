@@ -19,3 +19,34 @@ export const addTask = (task) => {
     task
   }
 }
+
+export const editTask = (task) => {
+  return {
+    type: types.EDIT_TASK,
+    task
+  }
+}
+
+export const openFormTask = () => {
+  return {
+    type: types.OPEN_MODAL_FORM_TASK
+  }
+}
+
+export const closeFormTask = () => {
+  return {
+    type: types.CLOSE_MODAL_FORM_TASK
+  }
+}
+
+export const openAlert = () => {
+  return {
+    type: types.OPEN_ALERT
+  }
+}
+
+export const closeAlert = () => {
+  return {
+    type: types.CLOSE_ALERT
+  }
+}

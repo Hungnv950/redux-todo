@@ -1,18 +1,13 @@
 import React from 'react';
 import TaskList from './TaskList';
-import TaskForm from './TaskForm';
+import TaskForm from './modals/TaskForm';
+import Alert from './modals/Alert';
 
 const App = () => {
   return (
     <div>
-      <div className="row">
-        <div className="col-md-4">
-          <TaskForm />
-        </div>
-        <div className="col-md-8">
-          <TaskList />
-        </div>
-      </div>
+      <TaskForm />
+      <TaskList />
     </div>
   )
 }
