@@ -1,57 +1,57 @@
 import * as types from '../contstants/ActionTypes'
 
-var data = JSON.parse(localStorage.getItem('tasks'));
+const data = JSON.parse(localStorage.getItem('tasks'));
 
-var initialState = data ? data : [];
+const initialState = data ? data : [];
 
-var setId = () => {
-  return Date.now();
-}
+const setId = () => {
+    return Date.now();
+};
 
-var findTaskById = (tasks, id)  => {
-  var result = -1;
-  tasks.forEach((task, index) => {
-    if(task.id === id) {
-      result = index;
+const findTaskById = (tasks, id) => {
+    let result = -1;
+    tasks.forEach((task, index) => {
+        if (task.id === id) {
+            result = index;
+        }
+    });
+    return result;
+};
+
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case types.LIST_ALL:
+            return state;
+
+        case types.DELETE_TASK:
+            const index = findTaskById(state, action.taskId);
+            state.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state];
+
+        case types.ADD_TASK:
+            debugger
+            const newTask = {
+                id: setId(),
+                name: action.state.taskName,
+                time: action.state.time,
+                completed: false
+            };
+            state.push(newTask);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state];
+
+        case types.EDIT_TASK:
+            console.log(action);
+            return state;
+
+        case types.UPDATE_TASK:
+            console.log(action);
+            return state;
+
+        default:
+            return state;
     }
-  });
-  return result;
-}
-
-var reducer = (state = initialState, action) => {
-  switch(action.type) {
-    case types.LIST_ALL:
-      return state;
-
-    case types.DELETE_TASK:
-      var index = findTaskById(state, action.taskId);
-      state.splice(index, 1);
-      localStorage.setItem('tasks', JSON.stringify(state));
-      return [...state];
-
-    case types.ADD_TASK:
-      console.log(action)
-      var newTask = {
-        id: setId(),
-        name: action.task.taskName,
-        time: action.task.time,
-        completed: false
-      }
-      state.push(newTask);
-      localStorage.setItem('tasks', JSON.stringify(state));
-      return [...state];
-
-    case types.EDIT_TASK:
-      console.log(action);
-      return state;
-
-    case types.UPDATE_TASK:
-      console.log(action);
-      return state;
-
-    default:
-      return state;
-  }
-}
+};
 
 export default reducer;
